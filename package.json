@@ -1,0 +1,29 @@
+{
+  "name": "react-autocomplete",
+  "version": "0.0.1",
+  "description": "Autocomplete component for react",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nik5036350/react-autocomplete.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Nik5036350",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nik5036350/react-autocomplete/issues"
+  },
+  "homepage": "https://github.com/Nik5036350/react-autocomplete",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "jsx-loader": "^0.12.2",
+    "react-hot-loader": "^1.1.5",
+    "webpack": "^1.5.3",
+    "webpack-dev-server": "^1.7.0"
+  }
+}
