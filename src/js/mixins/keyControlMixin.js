@@ -28,10 +28,42 @@ module.exports = {
             return item;
         }
     },
+    clearAc: function(){
+        this.refs.acInput.getDOMNode().value = '';
+        this.refs.acInput.getDOMNode().focus();
+    },
     onItemSelected: function(){
-        this.refs.acInput.getDOMNode().value = this.activeItem;
+        this.refs.acInput.getDOMNode().value = this.activeItem.value;
         this.setState({isOpen: false});
     },
+    getCaretPosition: function (oField) {
+
+    // Initialize
+    var iCaretPos = 0;
+
+    // IE Support
+    if (window.document.selection) {
+
+        // Set focus on the element
+        oField.focus();
+
+        // To get cursor position, get empty selection range
+        var oSel = window.document.selection.createRange();
+
+        // Move selection start to 0 position
+        oSel.moveStart('character', -oField.value.length);
+
+        // The caret position is selection length
+        iCaretPos = oSel.text.length;
+    }
+
+    // Firefox support
+    else if (oField.selectionStart || oField.selectionStart === 0) {
+        iCaretPos = oField.selectionStart;
+    }
+    // Return results
+    return (iCaretPos);
+},
     onKeyUp: function (e) {
         switch (e.keyCode) {
             case keyCodes.down_arrow:
@@ -53,11 +85,12 @@ module.exports = {
                 }else{
                     this.setState({isOpen: true});
                 }
+                e.preventDefault()
                 break;
             case keyCodes.right_arrow:
-                //if (this.model.carretPosition === this.model.acInput.value.length) {
-                //this.onRighrArrowPressed();
-                //}
+                if (this.getCaretPosition(this.refs.acInput.getDOMNode()) === this.refs.acInput.getDOMNode().value.length) {
+                    this.onItemSelected();
+                }
                 break;
             case keyCodes.enter:
                 this.onItemSelected();
