@@ -30,10 +30,12 @@ module.exports = {
     },
     clearAc: function(){
         this.refs.acInput.getDOMNode().value = '';
+        this.setState({selectedItems: []});
         this.refs.acInput.getDOMNode().focus();
     },
     onItemSelected: function(){
-        this.refs.acInput.getDOMNode().value = this.activeItem.value;
+        this.refs.acInput.getDOMNode().value = this.state.activeItem.value;
+        this.state.selectedItems.push(this.state.activeItem);
         this.setState({isOpen: false});
     },
     getCaretPosition: function (oField) {
@@ -85,7 +87,7 @@ module.exports = {
                 }else{
                     this.setState({isOpen: true});
                 }
-                e.preventDefault()
+                e.preventDefault();
                 break;
             case keyCodes.right_arrow:
                 if (this.getCaretPosition(this.refs.acInput.getDOMNode()) === this.refs.acInput.getDOMNode().value.length) {
